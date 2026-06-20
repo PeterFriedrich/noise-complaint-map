@@ -2,7 +2,6 @@ const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 let activeDow = null; // null = all days
 let allFeatures = [];
 let deckOverlay;
-let map;
 
 async function init() {
   const [geojson, meta] = await Promise.all([
@@ -30,23 +29,6 @@ async function init() {
   buildDowButtons();
 }
 
-function buildStyle() {
-  if (BASEMAP_URL) {
-    // Phase 0 complete — use self-hosted pmtiles on R2
-    const protocol = new pmtiles.Protocol();
-    maplibregl.addProtocol("pmtiles", protocol.tile);
-    return {
-      version: 8,
-      glyphs: "https://protomaps.github.io/basemaps-assets/fonts/{fontstack}/{range}.pbf",
-      sources: {
-        protomaps: { type: "vector", url: BASEMAP_URL, attribution: "© OpenStreetMap" },
-      },
-      layers: protomapsThemesBase.layersWithCustomTheme("protomaps", "dark"),
-    };
-  }
-  // Fallback: blank dark background until R2 is set up
-  return { version: 8, sources: {}, layers: [{ id: "bg", type: "background", paint: { "background-color": "#1a1a2e" } }] };
-}
 
 function buildLayers() {
   const data = activeDow === null
@@ -94,7 +76,7 @@ function setDow(dow, activeBtn) {
   activeDow = dow;
   document.querySelectorAll("#dow-filter button").forEach(b => b.classList.remove("active"));
   activeBtn.classList.add("active");
-  deckOverlay.setProps({ layers: buildLayers(), viewState: deckOverlay.viewState });
+  deckOverlay.setProps({ layers: buildLayers() });
 }
 
 init();

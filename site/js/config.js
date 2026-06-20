@@ -1,6 +1,5 @@
-// Fill in BASEMAP_URL after completing Phase 0 (R2 setup)
-// Format: "pmtiles://https://<your-r2-bucket>.r2.dev/edmonton.pmtiles"
-const BASEMAP_URL = null;
+// BASEMAP_URL: fill in after Phase 0 (R2 setup) when adding MapLibre basemap
+// const BASEMAP_URL = "pmtiles://https://<your-r2-bucket>.r2.dev/edmonton.pmtiles";
 
 const INITIAL_VIEW = {
   longitude: -113.4938,
