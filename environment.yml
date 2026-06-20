@@ -1,0 +1,8 @@
+name: noise-complaint-map
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - requests
+  - pytest

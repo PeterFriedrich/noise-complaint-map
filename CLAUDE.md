@@ -1,12 +1,18 @@
 # noise-complaint-map
 
 ## Stack
-Python 3.x, pandas, sodapy (Socrata client), HTML/CSS/JS (no bundler), GitHub Pages
+Python 3.11, requests, HTML/CSS/JS (no bundler), GitHub Pages
+
+## Environment
+```bash
+conda env create -f environment.yml
+conda activate noise-complaint-map
+```
 
 ## Key Commands
-- Run pipeline: `TODO — fill after env confirmed`
-- Test: `TODO — fill after env confirmed`
-- Lint: `TODO — fill after env confirmed`
+- Run pipeline: `bash pipeline/run.sh`
+- Run pipeline steps individually: `python3 pipeline/fetch.py && python3 pipeline/transform.py && python3 pipeline/generate.py`
+- Test: `python3 -m pytest tests/ -v`
 
 ## Structure
 ```
