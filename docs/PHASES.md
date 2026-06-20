@@ -57,3 +57,4 @@ GitHub Pages has documented, browser-inconsistent failures serving `.pmtiles` ra
 - Neighbourhood search / highlight
 - Embed mode for sharing individual day views
 - Alert if complaint count spikes above threshold
+- Normalize complaint counts by neighbourhood population (raw counts favour dense areas)

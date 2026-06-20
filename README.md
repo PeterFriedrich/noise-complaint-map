@@ -1,5 +1,7 @@
 # noise-complaint-map
 
+**Live site: https://peterfriedrich.github.io/noise-complaint-map/**
+
 A static visualization of Edmonton noise complaints sourced from Edmonton Open Data (Socrata). A Python pipeline runs on a scheduled basis, fetches complaint data, and generates a static site hosted on GitHub Pages. Users can explore complaint density by neighbourhood and day of week — are noise complaints going up? Which days are worst?
 
 ## Setup
