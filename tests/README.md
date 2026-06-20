@@ -7,7 +7,9 @@ Unit tests on pipeline logic (transform, aggregation). Integration test for Socr
 Aim for >80% on core logic. All public interfaces in transform.py must have at least one test.
 
 ## Running
-`TODO — fill after stack is confirmed`
+```bash
+python3 -m pytest tests/ -v
+```
 
 ## What to test
 - All aggregation and transformation functions in transform.py
