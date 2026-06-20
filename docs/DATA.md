@@ -7,7 +7,7 @@
 - Dataset ID: `ypje-j649`
 - URL: `https://data.edmonton.ca/resource/ypje-j649.json`
 - Coverage: January 1, 2011 to present
-- Auth: Socrata API key (see `.env`)
+- Auth: basic auth (`SOCRATA_API_KEY_ID:SOCRATA_API_KEY_SECRET` from `.env`) — the app token header (`X-App-Token`) does not work with these credentials
 
 ## Noise Complaint Filter
 
@@ -40,7 +40,13 @@ complaint_category = 'Noise'
 | Longitude | `longitude` | Number | |
 | Location | `location` | Location | Combined geo field |
 
-## Open Questions
+## Update Frequency
 
-- How frequently does Edmonton refresh this dataset? (Determines cron cadence)
-- Are Socrata field names above confirmed, or inferred from display names? (Verify with a small test query before building pipeline)
+Dataset is updated **daily** (confirmed via Socrata metadata). Pipeline cron should run once per day, overnight.
+
+## Notes (from live test query)
+
+- All field names above confirmed via `$limit=5` test query
+- `type_of_complaint` is always `"Noise"` for noise complaints — no useful subcategory data
+- `neighbourhood` and `neighbourhood_id` can be missing (some records have no neighbourhood)
+- `count` is always `"1.0"` — one row per complaint, not pre-aggregated
