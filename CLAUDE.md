@@ -28,6 +28,7 @@ session-summary/ ← handoff docs
 - Spec (read-only): docs/SPEC.md
 - Architecture: docs/ARCHITECTURE.md
 - Phases: docs/PHASES.md
+- Data sources & fields: docs/DATA.md
 - Session handoff: session-summary/
 
 ## Session Loop
