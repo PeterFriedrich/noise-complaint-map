@@ -2,6 +2,7 @@ const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 let activeDow = null; // null = all days
 let allFeatures = [];
 let deckOverlay;
+let map;
 
 async function init() {
   const [geojson, meta] = await Promise.all([
@@ -14,15 +15,16 @@ async function init() {
   document.getElementById("meta").textContent =
     `${meta.record_count.toLocaleString()} complaints · updated ${meta.built_at.slice(0, 10)}`;
 
-  const map = new maplibregl.Map({
-    container: "map",
-    style: buildStyle(),
-    ...INITIAL_VIEW,
-  });
+  const canvas = document.createElement("canvas");
+  canvas.style.cssText = "position:absolute;top:0;left:0;width:100%;height:100%;";
+  document.getElementById("map").appendChild(canvas);
 
-  map.on("load", () => {
-    deckOverlay = new deck.MapboxOverlay({ layers: buildLayers() });
-    map.addControl(deckOverlay);
+  deckOverlay = new deck.Deck({
+    canvas,
+    initialViewState: INITIAL_VIEW,
+    controller: true,
+    layers: buildLayers(),
+    onResize: ({width, height}) => { canvas.width = width; canvas.height = height; },
   });
 
   buildDowButtons();
@@ -92,7 +94,7 @@ function setDow(dow, activeBtn) {
   activeDow = dow;
   document.querySelectorAll("#dow-filter button").forEach(b => b.classList.remove("active"));
   activeBtn.classList.add("active");
-  deckOverlay.setProps({ layers: buildLayers() });
+  deckOverlay.setProps({ layers: buildLayers(), viewState: deckOverlay.viewState });
 }
 
 init();
