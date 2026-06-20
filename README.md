@@ -4,11 +4,28 @@ A static visualization of Edmonton noise complaints sourced from Edmonton Open D
 
 ## Setup
 
-TODO — fill after stack is confirmed
+```bash
+conda env create -f environment.yml
+conda activate noise-complaint-map
+cp .env.example .env  # then fill in your Socrata credentials
+```
+
+Socrata API credentials: generate at https://data.edmonton.ca/profile/edit/developer_settings
 
 ## Usage
 
-TODO — fill after stack is confirmed
+```bash
+# Run the full pipeline (fetch → transform → generate → commit → push)
+bash pipeline/run.sh
+
+# Or run steps individually
+python3 pipeline/fetch.py      # fetches raw data to data/raw_complaints.json
+python3 pipeline/transform.py  # converts to site/data/complaints.geojson
+python3 pipeline/generate.py   # writes site/data/meta.json
+
+# Run tests
+python3 -m pytest tests/ -v
+```
 
 ## Project Structure
 
