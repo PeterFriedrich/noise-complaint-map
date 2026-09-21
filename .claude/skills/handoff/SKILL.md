@@ -18,9 +18,31 @@ The document must be detailed enough that a fresh Claude session reading ONLY th
 - `git log --oneline -5` — recent commit history
 - `git diff --stat HEAD` — files changed since last commit
 
+## Recording the model + effort (§0)
+
+Open every handoff with the model and effort level that produced the work. It
+tells the next session (and the owner) how hard to re-check what it is reading —
+a weaker or lower-effort session's output warrants a closer review pass, and
+that judgement is impossible to make after the fact if nobody wrote it down.
+
+In order of reliability:
+- **Effort — verifiable.** Run `echo "$CLAUDE_EFFORT"`; do not recall it. If the
+  variable is empty, write "not exposed", not a guess.
+- **Model — from the session's own context.** There is no on-disk record to
+  check it against.
+- ⚠️ **A mid-session model switch may not be reflected in the running context.**
+  If the model changed part-way, or you are unsure, say so and attribute per
+  phase — "built under Sonnet 5, reviewed under Opus 5" — rather than printing
+  one confident name over work two different models did.
+
 ---
 
 ## Output format
+
+## 0. Session Metadata
+- **Model:** <e.g. Opus 5 (`claude-opus-5`)> — note per-phase if it changed mid-session
+- **Effort:** <value of `$CLAUDE_EFFORT`, checked not recalled>
+- **Date / session:** <YYYY-MM-DD>
 
 ## 1. Goal
 - High-level project goal

@@ -5,3 +5,6 @@ __pycache__/
 *.egg-info/
 .DS_Store
 data/raw_complaints.json
+
+# Claude Code personal settings (per-machine permission grants)
+.claude/settings.local.json
