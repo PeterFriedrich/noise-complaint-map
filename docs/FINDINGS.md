@@ -62,3 +62,4 @@ Exploratory analysis run against the full dataset (14,656 records, `ypje-j649`, 
 - [ ] Time of day distribution (morning / afternoon / evening / night)
 - [ ] Geographic clustering — which neighbourhoods or hex cells concentrate complaints
 - [ ] Whether the weekday spike is driven by specific complaint types or times of day
+- [ ] Whether the weekday complaint spike tracks measured corridor sound or is a reporting artifact — the independent Edmonton Noise Watch sensors (`docs/EXTERNAL-SOURCES.md`) publish continuous dBA on three traffic corridors and could answer this for those corridors

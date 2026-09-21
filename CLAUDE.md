@@ -35,6 +35,7 @@ session-summary/ ← handoff docs
 - Architecture: docs/ARCHITECTURE.md
 - Phases: docs/PHASES.md
 - Data sources & fields: docs/DATA.md
+- External/candidate sources (not in pipeline): docs/EXTERNAL-SOURCES.md
 - Session handoff: session-summary/
 
 ## Session Loop
