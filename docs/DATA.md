@@ -50,3 +50,13 @@ Dataset is updated **daily** (confirmed via Socrata metadata). Pipeline cron sho
 - `type_of_complaint` is always `"Noise"` for noise complaints — no useful subcategory data
 - `neighbourhood` and `neighbourhood_id` can be missing (some records have no neighbourhood)
 - `count` is always `"1.0"` — one row per complaint, not pre-aggregated
+
+## Other Sources
+
+Edmonton Open Data (`ypje-j649`, above) is the **only** source the pipeline reads.
+
+Candidate complementary sources that have been evaluated but not adopted are
+documented in `docs/EXTERNAL-SOURCES.md` — currently the independent Edmonton
+Noise Watch sensor fleet (`sethdear.ca`), which measures corridor dBA rather than
+complaints. Nothing moves into this file until it is actually wired into the
+pipeline.

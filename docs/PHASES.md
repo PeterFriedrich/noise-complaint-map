@@ -58,3 +58,4 @@ GitHub Pages has documented, browser-inconsistent failures serving `.pmtiles` ra
 - Embed mode for sharing individual day views
 - Alert if complaint count spikes above threshold
 - Normalize complaint counts by neighbourhood population (raw counts favour dense areas)
+- Compare complaint density against independent corridor sound measurements (see `docs/EXTERNAL-SOURCES.md`) — separate layer, clearly labelled unofficial; evaluated 2026-09-21, not adopted
