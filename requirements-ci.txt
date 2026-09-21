@@ -1,0 +1,7 @@
+# What the merge gate installs (.github/workflows/tests.yml). Keep it to what
+# tests/ and scripts/check_*.py need, and in lockstep with environment.yml --
+# conda is the local environment, this file is CI's.
+#
+# The pipeline's own dependency (requests) is deliberately NOT here: nothing the
+# gate runs makes a network call, and tests/ is all-synthetic.
+pytest==9.0.3

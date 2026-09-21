@@ -9,6 +9,26 @@
 - Coverage: January 1, 2011 to present
 - Auth: basic auth (`SOCRATA_API_KEY_ID:SOCRATA_API_KEY_SECRET` from `.env`) — the app token header (`X-App-Token`) does not work with these credentials
 
+## Download Completeness
+
+⚠️ **An API that pages or caps truncates *silently*** — Socrata returns exactly
+the rows the `$limit`/`$offset` walk asked for, with no error and no signal that
+more existed. A short fetch publishes a thinner map with every test still green.
+
+**Every downloader verifies its row count against the live server count and
+fails hard on a mismatch.** `fetch.py` does not do this yet — it pages until a
+short batch and trusts the result. Tracked in `TODO.md`.
+
+## Vintage
+
+Record, per fetch: the dataset id, the retrieval timestamp, and **the
+publisher's own last-updated stamp**. A build timestamp is not a data
+timestamp — if the source stalls, a nightly build keeps stamping "updated
+today" over unchanged data.
+
+A guard must measure the DATA (row counts, max `date_created` in the file),
+never a metadata string that can go stale while the guard stays green.
+
 ## Noise Complaint Filter
 
 All pipeline queries must filter on:

@@ -1,0 +1,58 @@
+name: Tests
+
+# THE MERGE GATE. Runs on every PR and every push to main. Without one, "tests
+# pass" in a PR body attests to the author's laptop -- or, in a web session, to
+# a container where pytest was not even installed.
+#
+# Deliberately OFFLINE and secret-free: tests/ is synthetic and the doc guards
+# read only committed files, so this needs no network, no Socrata credentials
+# and no token. It stays fast and cannot flake on an upstream outage -- a merge
+# gate that goes red for reasons unrelated to the change is one people learn to
+# ignore.
+#
+# This gates the CHANGE. .github/workflows/deploy.yml publishes the SITE. If a
+# scheduled data-refresh workflow is ever added, give THAT its own pytest step
+# too: gating the data publish is a third question again.
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          fetch-depth: 0  # tests/test_loaded_path.py reads git history
+
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.3.0
+        with:
+          python-version: '3.11'  # matches environment.yml
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements-ci.txt
+
+      # `python -m pytest`, not bare `pytest`: the tests import `pipeline.*`,
+      # which resolves only because -m puts the repo root on sys.path.
+      - name: Run tests
+        run: python -m pytest tests/ -q
+
+      # Bans line-number citations and fails on an unresolvable section pointer.
+      - name: Check doc citations
+        run: python scripts/check_doc_citations.py
+
+      # A new DECISIONS.md row names a test that exists or is tagged
+      # [unverifiable]; a superseded row is marked where it stands.
+      - name: Check decisions log
+        run: python scripts/check_decisions_log.py
